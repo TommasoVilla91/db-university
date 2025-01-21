@@ -17,9 +17,9 @@ FROM `courses`
 WHERE `cfu` > 10;
 
 <!-- 3. Selezionare tutti gli studenti che hanno più di 30 anni -->
-SELECT *
+SELECT *, timestampdiff(YEAR, `date_of_birth`, CURDATE()) AS `age`
 FROM `students`
-WHERE `date_of_birth` <= "1994-01-20";
+WHERE timestampdiff(YEAR, `date_of_birth`, CURDATE()) > 30;
 
 <!-- 4. Selezionare tutti i corsi del primo semestre del primo anno di un qualsiasi corso di laurea (286) -->
 SELECT *
@@ -35,7 +35,7 @@ AND `year` = 1;
 <!-- 5. Selezionare tutti gli appelli d'esame che avvengono nel pomeriggio (dopo le 14) del 20/06/2020 (21) -->
 SELECT *
 FROM `exams`
-WHERE `hour` > "14:00:00"
+WHERE `hour` >= "14:00:00"
 AND `date` = "2020-06-20";
 
 SELECT COUNT(*)
